@@ -15,31 +15,30 @@ go
 use [SampleDatabase]
 go
 
-drop table if exists [Image]
-create table [Image]
+drop table if exists [Person]
+create table [Person]
 (
 	[Id] int identity(1, 1),
 	[Name] nvarchar(max),
-	[Value] varbinary(max)
+	[PhoneNumber] nvarchar(max),
 )
 
-declare @ImageBinary varbinary(max)
-select
-	@ImageBinary = [BulkColumn]
-from
-	openrowset(
-		bulk N'/tmp/Sample.jpg',  -- Dockerコンテナ側のパス
-		single_blob
-	) as [TempImage]
-
 insert into
-	[Image]
+	[Person]
 	(
 		[Name],
-		[Value]
+		[PhoneNumber]
 	)
 values
 	(
-		N'御坂美琴ちゃん',
-		@ImageBinary
+		N'A太郎',
+		N'090-1234-5678'
+	),
+	(
+		N'B太郎',
+		NULL
+	),
+	(
+		N'C太郎',
+		N'(090-1234-5678)'
 	)
