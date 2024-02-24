@@ -18,27 +18,16 @@ go
 drop table if exists [Person]
 create table [Person]
 (
-	[Id] int identity(1, 1),
-	[Name] nvarchar(max),
-	[PhoneNumber] nvarchar(max),
+	[Id] int identity(1, 1) not null,
+	[Name] nvarchar(max) not null,
+	[Age] int not null,
+	[IsMale] bit null
 )
 
 insert into
 	[Person]
-	(
-		[Name],
-		[PhoneNumber]
-	)
+	([Name], [Age], [IsMale])
 values
-	(
-		N'A太郎',
-		N'090-1234-5678'
-	),
-	(
-		N'B太郎',
-		NULL
-	),
-	(
-		N'C太郎',
-		N'(090-1234-5678)'
-	)
+	(N'Bob', 20, 1),
+	(N'Alice', 22, 0),
+	(N'John', 25, NULL)
